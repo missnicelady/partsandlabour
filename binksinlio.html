@@ -1,1 +1,281 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>&#10084;binksinlio&#10084;</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Courier+Prime:wght@400;700&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --pink: #f4a7c3;
+  --pink-light: #fde8f2;
+  --pink-dark: #c2607e;
+  --lavender: #c9b8f0;
+  --lav-light: #ede8fc;
+  --lav-dark: #7c5cbf;
+  --mint: #a8e6d0;
+  --mint-light: #e4f8f2;
+  --yellow: #ffe08a;
+  --text: #2a1a2e;
+  --text-muted: #7a5a7e;
+  --border: #e8c4dc;
+  --bg: #fff9fd;
+}
+
+body {
+  font-family: 'Courier Prime', monospace;
+  background: var(--bg);
+  background-image:
+    radial-gradient(circle at 15% 30%, #fde8f280 0%, transparent 40%),
+    radial-gradient(circle at 85% 70%, #ede8fc80 0%, transparent 40%);
+  color: var(--text);
+  min-height: 100vh;
+  text-transform: lowercase;
+  padding-bottom: 80px;
+}
+
+.stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+.star {
+  position: absolute; border-radius: 50%;
+  animation: twinkle var(--d) ease-in-out infinite alternate;
+  opacity: 0.4;
+}
+@keyframes twinkle {
+  from { opacity: 0.15; transform: scale(0.8); }
+  to   { opacity: 0.6;  transform: scale(1.2); }
+}
+
+header {
+  text-align: center;
+  padding: 2.5rem 1.25rem 1.5rem;
+  position: relative; z-index: 1;
+  border-bottom: 2px solid var(--pink);
+}
+.back-link {
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--text-muted); cursor: pointer;
+  display: inline-block; margin-bottom: 1rem;
+  transition: color 0.15s;
+}
+.back-link:hover { color: var(--pink-dark); }
+h1 {
+  font-family: 'VT323', monospace;
+  font-size: clamp(2.8rem, 9vw, 5rem);
+  color: var(--text); line-height: 1;
+  letter-spacing: 2px;
+}
+h1 span { color: var(--pink-dark); }
+
+main {
+  max-width: 520px; margin: 0 auto;
+  padding: 2rem 1.25rem;
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; gap: 1.5rem;
+}
+
+.section-btn {
+  display: flex; align-items: center; gap: 14px;
+  padding: 1.25rem 1.25rem;
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: transform 0.18s, border-color 0.18s;
+  text-decoration: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+}
+.section-btn:hover { transform: translateX(6px); }
+
+.section-btn.celestial { background: var(--lav-light); border-color: var(--lavender); }
+.section-btn.celestial:hover { border-color: var(--lav-dark); }
+.section-btn.tender   { background: var(--pink-light); border-color: var(--pink); }
+.section-btn.tender:hover   { border-color: var(--pink-dark); }
+.section-btn.shadows  { background: #1a0a2e; border-color: #4a2a6e; }
+.section-btn.shadows:hover  { border-color: #9966cc; }
+
+.btn-glyph {
+  font-family: 'VT323', monospace;
+  font-size: 2.2rem; line-height: 1;
+  flex-shrink: 0; width: 40px; text-align: center;
+}
+.celestial .btn-glyph { color: var(--lav-dark); }
+.tender .btn-glyph    { color: var(--pink-dark); }
+.shadows .btn-glyph   { color: #c9b8f0; }
+
+.btn-text { display: flex; flex-direction: column; gap: 3px; }
+.btn-title {
+  font-family: 'VT323', monospace;
+  font-size: 1.6rem; letter-spacing: 1.5px; line-height: 1;
+}
+.celestial .btn-title { color: var(--lav-dark); }
+.tender .btn-title    { color: var(--pink-dark); }
+.shadows .btn-title   { color: #e8c4f8; }
+
+.btn-sub {
+  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+}
+.celestial .btn-sub { color: var(--text-muted); }
+.tender .btn-sub    { color: var(--text-muted); }
+.shadows .btn-sub   { color: #9966cc; }
+
+.btn-arrow {
+  margin-left: auto; font-size: 1rem; flex-shrink: 0;
+}
+.celestial .btn-arrow { color: var(--lav-dark); }
+.tender .btn-arrow    { color: var(--pink-dark); }
+.shadows .btn-arrow   { color: #9966cc; }
+
+/* player bar */
+#player-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--bg); border-top: 2px solid var(--pink);
+  padding: 0 1rem; height: 54px;
+  display: flex; align-items: center; gap: 12px; z-index: 100;
+}
+.player-logo { font-family: 'VT323', monospace; font-size: 1.3rem; color: var(--pink-dark); white-space: nowrap; letter-spacing: 1px; }
+.player-logo span { color: var(--text-muted); font-size: 1rem; }
+.play-btn {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1.5px solid var(--pink-dark); background: var(--pink-light);
+  color: var(--pink-dark); font-size: 13px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: background 0.15s;
+}
+.play-btn:hover { background: var(--pink); }
+.player-info { display: flex; flex-direction: column; gap: 1px; overflow: hidden; flex: 1; }
+.player-station { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text); white-space: nowrap; }
+.player-ticker { font-size: 10px; color: var(--text-muted); white-space: nowrap; overflow: hidden; }
+.ticker-inner { display: inline-block; animation: ticker 18s linear infinite; }
+@keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+.player-vis { display: flex; align-items: flex-end; gap: 2px; height: 18px; flex-shrink: 0; }
+.bar { width: 3px; border-radius: 2px; background: var(--pink-dark); opacity: 0.3; }
+.bar:nth-child(1) { animation: b1 0.8s ease-in-out infinite alternate; }
+.bar:nth-child(2) { animation: b2 0.6s ease-in-out infinite alternate; }
+.bar:nth-child(3) { animation: b3 1s ease-in-out infinite alternate; }
+.bar:nth-child(4) { animation: b4 0.7s ease-in-out infinite alternate; }
+.bar:nth-child(5) { animation: b5 0.9s ease-in-out infinite alternate; }
+@keyframes b1 { from { height: 4px; } to { height: 14px; } }
+@keyframes b2 { from { height: 8px; } to { height: 18px; } }
+@keyframes b3 { from { height: 3px; } to { height: 12px; } }
+@keyframes b4 { from { height: 6px; } to { height: 16px; } }
+@keyframes b5 { from { height: 5px; } to { height: 10px; } }
+.bars-paused .bar { animation-play-state: paused !important; }
+.vol-wrap { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.vol-icon { font-size: 13px; color: var(--text-muted); }
+input[type=range].vol-slider { width: 60px; accent-color: var(--pink-dark); }
+@media (max-width: 480px) { .vol-wrap { display: none; } }
+
+#overlay {
+  position: fixed; inset: 0; background: var(--pink-light);
+  z-index: 999; opacity: 0; pointer-events: none;
+  transition: opacity 0.5s;
+  display: flex; align-items: center; justify-content: center;
+}
+#overlay.show { opacity: 1; pointer-events: all; }
+.overlay-text { font-family: 'VT323', monospace; font-size: 2.5rem; color: var(--pink-dark); letter-spacing: 4px; }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<header>
+  <div class="back-link" onclick="window.location.href='index.html'">&#8592; back</div>
+  <h1><span>&#10084;</span>binksinlio<span>&#10084;</span></h1>
+</header>
+
+<main>
+  <div class="section-btn celestial" onclick="go('celestial-kingdom.html')">
+    <div class="btn-glyph">&#9728;</div>
+    <div class="btn-text">
+      <div class="btn-title">celestial kingdom</div>
+      <div class="btn-sub">stars, signs & what the sky says</div>
+    </div>
+    <div class="btn-arrow">&#8594;</div>
+  </div>
+
+  <div class="section-btn tender" onclick="go('tender-hearts-club.html')">
+    <div class="btn-glyph">&#10084;</div>
+    <div class="btn-text">
+      <div class="btn-title">tender hearts club</div>
+      <div class="btn-sub">love, softness & feeling things</div>
+    </div>
+    <div class="btn-arrow">&#8594;</div>
+  </div>
+
+  <div class="section-btn shadows" onclick="go('book-of-shadows.html')">
+    <div class="btn-glyph">&#9790;</div>
+    <div class="btn-text">
+      <div class="btn-title">the book of shadows</div>
+      <div class="btn-sub">rituals, mystery & the unseen</div>
+    </div>
+    <div class="btn-arrow">&#8594;</div>
+  </div>
+</main>
+
+<div id="overlay"><div class="overlay-text">entering...</div></div>
+
+<div id="player-bar">
+  <div class="player-logo">kcrw <span>✦</span></div>
+  <button class="play-btn" id="playBtn">&#9654;</button>
+  <div class="player-info">
+    <div class="player-station">89.9 fm — santa monica</div>
+    <div class="player-ticker">
+      <span class="ticker-inner">click play to stream kcrw live &nbsp;&nbsp;&nbsp;✦&nbsp;&nbsp;&nbsp; music discovery radio from santa monica, ca &nbsp;&nbsp;&nbsp;✦&nbsp;&nbsp;&nbsp; independent public radio</span>
+    </div>
+  </div>
+  <div class="player-vis bars-paused" id="vis">
+    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+    <div class="bar"></div><div class="bar"></div>
+  </div>
+  <div class="vol-wrap">
+    <span class="vol-icon">&#9834;</span>
+    <input type="range" class="vol-slider" id="vol" min="0" max="1" step="0.05" value="0.8">
+  </div>
+</div>
+
+<audio id="kcrwAudio" preload="none">
+  <source src="https://kcrw.streamguys1.com/kcrw_192k_mp3_e24_internet_radio" type="audio/mpeg">
+</audio>
+
+<script>
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 38; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 5 + 2;
+    s.style.cssText = `width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${(Math.random()*2+1.5).toFixed(1)}s;background:${Math.random()>0.5?'#f4a7c3':'#c9b8f0'};animation-delay:${(Math.random()*2).toFixed(1)}s;`;
+    starsEl.appendChild(s);
+  }
+
+  function go(dest) {
+    const ov = document.getElementById('overlay');
+    ov.classList.add('show');
+    setTimeout(() => { window.location.href = dest; }, 900);
+  }
+
+  const audio = document.getElementById('kcrwAudio');
+  const playBtn = document.getElementById('playBtn');
+  const vis = document.getElementById('vis');
+  const volSlider = document.getElementById('vol');
+  let playing = false;
+  audio.volume = 0.8;
+  playBtn.addEventListener('click', () => {
+    if (!playing) {
+      audio.play(); playBtn.innerHTML = '&#9632;';
+      vis.classList.remove('bars-paused'); playing = true;
+    } else {
+      audio.pause(); audio.src = audio.src;
+      playBtn.innerHTML = '&#9654;';
+      vis.classList.add('bars-paused'); playing = false;
+    }
+  });
+  volSlider.addEventListener('input', () => { audio.volume = volSlider.value; });
+</script>
+</body>
+</html>
